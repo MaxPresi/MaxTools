@@ -40,13 +40,6 @@ namespace MaxTool
             thisComputer.Open();
             backgroundWorker1.RunWorkerAsync();
 
-            outros frm = new outros();
-            frm.TopLevel = false;
-            frm.Visible = true;
-            frm.FormBorderStyle = FormBorderStyle.None;
-            frm.Dock = DockStyle.Fill;
-            tabControl1.TabPages[1].Controls.Add(frm);
-
             install frm2 = new install();
             frm2.TopLevel = false;
             frm2.Visible = true;
