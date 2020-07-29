@@ -21,9 +21,9 @@ using System.DirectoryServices.AccountManagement;
 using System.Text.RegularExpressions;
 using OpenHardwareMonitor.Hardware;
 using System.Timers;
-using MaxTools.bw;
 using Microsoft.Win32.TaskScheduler;
 using System.ServiceProcess;
+using MaxTools.Modules;
 
 namespace MaxTool
 {
@@ -39,21 +39,31 @@ namespace MaxTool
             thisComputer = new Computer() { CPUEnabled = true };
             thisComputer.Open();
             backgroundWorker1.RunWorkerAsync();
+            
+            Install inst = new Install();
+            inst.Visible = true;
+            inst.Dock = DockStyle.Fill;
+            tabControl1.TabPages[0].Controls.Add(inst);
 
-            outros frm = new outros();
-            frm.TopLevel = false;
-            frm.Visible = true;
-            frm.FormBorderStyle = FormBorderStyle.None;
-            frm.Dock = DockStyle.Fill;
-            tabControl1.TabPages[1].Controls.Add(frm);
+            Util util = new Util();
+            util.Visible = true;
+            util.Dock = DockStyle.Fill;
+            tabControl1.TabPages[1].Controls.Add(util);
 
-            install frm2 = new install();
-            frm2.TopLevel = false;
-            frm2.Visible = true;
-            frm2.FormBorderStyle = FormBorderStyle.None;
-            frm2.Dock = DockStyle.Fill;
-            tabControl1.TabPages[0].Controls.Add(frm2);
+            Tools tools = new Tools();
+            tools.Visible = true;
+            tools.Dock = DockStyle.Fill;
+            tabControl1.TabPages[2].Controls.Add(tools);
+
+            Hard hard = new Hard();
+            hard.Visible = true;
+            hard.Dock = DockStyle.Fill;
+            tabControl1.TabPages[3].Controls.Add(hard);
+
+           
         }
+
+        public int hardvar = 0;
 
         [DllImport("wininet.dll")]
         private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
@@ -429,419 +439,97 @@ namespace MaxTool
             tools.BackColor = SystemColors.Desktop;
         }
 
-
-
-        #endregion       
-
-        #region tools
-        private void Aida_Click(object sender, EventArgs e)
+        private void hard_Click(object sender, EventArgs e)
         {
-            Process.Start(@"\util\AIDA64\AIDA64EngineerPortable.exe");
-        }
-
-        private void Hwinfo_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\HWiNFO\HWiNFO64.exe");
-        }
-
-        private void processexp_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\procexp64.exe");
-        }
-
-        private void driverpack_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\DriverPack.exe");
-        }
-
-        private void minitool_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\Minitool\PartitionWizard10Portable.exe");
-        }
-
-        private void glary_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\GlaryUtilities\GlaryUtilities5Portable.exe");
-        }
-
-        private void rdp_Click(object sender, EventArgs e)
-        {
-            Process.Start("mstsc");
-        }
-
-        private void tvptb_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\Teamviewer\TeamViewer.exe");
-        }
-
-        private void chromeptb_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\chrome\GoogleChromePortable.exe");
-        }
-
-        private void firefoxptb_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\Firefox\FirefoxPortable.exe");
-        }
-
-        private void norton_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\NPE.exe");
-        }
-
-        private void adw_Click(object sender, EventArgs e)
-        {
-            Process.Start("https://downloads.malwarebytes.com/file/adwcleaner");
-        }
-
-        private void malware_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\Malwarebytes\MalwarebytesPortable.exe");
-        }
-
-        private void gdb_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\GetDataBack\GetDataBackProPortable.exe");
-        }
-
-        private void rstudio_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\RStudio\RStudioPortable.exe");
-        }
-
-        private void fixit_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\MicrosoftProgram_Install_and_Uninstall.meta");
-        }
-
-        private void iobit_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\revo\revo.exe");
-        }
-
-        private void burnin_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\burnin\BurnInTestPortable.exe");
-        }
-
-        private void kombustor_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\FurMark\FurMark.exe");
-        }
-
-        private void produkey_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\ProduKey64.exe");
-        }
-
-        private void stella_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\stellar.exe");
-        }
-
-        private void notepad_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\Notepad++\Notepad++Portable.exe");
-        }
-
-        private void unlocker_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\Unlocker\UnlockerPortable.exe");
-        }
-
-        private void cdinfo_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\crystaldisk\DiskInfo64.exe");
-        }
-
-        private void cdmark_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"\util\crystaldisk\DiskMark64.exe");
+            tabControl1.SelectedTab = hardtab;
+            hard.BackColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            intall.BackColor = SystemColors.Desktop;
+            util.BackColor = SystemColors.Desktop;
+            tools.BackColor = SystemColors.Desktop;
+            hardvar = 1;
         }
 
         #endregion
 
-        #region util
-
-        private void msconfig_Click(object sender, EventArgs e)
-        {
-            Process.Start("msconfig");
-        }
-
         private void gerenciar_Click(object sender, EventArgs e)
         {
-            Process.Start("compmgmt.msc");
+
         }
 
         private void eventos_Click(object sender, EventArgs e)
         {
-            Process.Start("eventvwr.msc");
-        }
 
-        private void perfmon_Click(object sender, EventArgs e)
-        {
-            Process.Start("perfmon.exe", "/res");
-        }
-
-        private void impressoras_Click(object sender, EventArgs e)
-        {
-            Process.Start("control.exe", "/name microsoft.devicesandprinters");
-        }
-
-        private void ipconf_Click(object sender, EventArgs e)
-        {
-            Process.Start("cmd.exe", " /C ipconfig /release&ipconfig /renew&ipconfig /flushdns");
-        }
-
-        private void gpup_Click(object sender, EventArgs e)
-        {
-            Process.Start("gpupdate");
-        }
-
-        private void prompt_Click(object sender, EventArgs e)
-        {
-            Process p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.WorkingDirectory = @"C:\";
-            p.StartInfo.UseShellExecute = false;
-            p.Start();
-        }
-
-        private void contas_Click(object sender, EventArgs e)
-        {
-            Process.Start("netplwiz");
-        }
-
-        private void dispositivos_Click(object sender, EventArgs e)
-        {
-            Process.Start("devmgmt.msc");
-        }
-
-        private void gpo_Click(object sender, EventArgs e)
-        {
-            Process.Start("gpedit.msc");
-        }
-
-        private void services_Click(object sender, EventArgs e)
-        {
-            Process.Start("services.msc");
-        }
-
-        private void limpardisco_Click(object sender, EventArgs e)
-        {
-            Process.Start("cleanmgr.exe", "/d");
-        }
-
-        private void painel_Click(object sender, EventArgs e)
-        {
-            Process.Start("control.exe");
         }
 
         private void memtest_Click(object sender, EventArgs e)
         {
-            Process.Start("control.exe", "/name Microsoft.NetworkandSharingCenter");
+
+        }
+
+        private void perfmon_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void impressoras_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void painel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ipconf_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gpup_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void prompt_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void winr_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                string run = null;
-                run = openFileDialog1.FileName;
-                Process.Start(run);
-            }
+
         }
 
-        #endregion
-
-        #region hard
-        int a = 0;
-        private void hard_Click(object sender, EventArgs e)
+        private void contas_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = hardtab;
-            hard.BackColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));            
-            intall.BackColor = SystemColors.Desktop;
-            util.BackColor = SystemColors.Desktop;
-            tools.BackColor = SystemColors.Desktop;
 
-            
-
-            if (a == 0)
-            {
-                label7.Text = HardwareInfo.getmoboInfo() + HardwareInfo.getbeiosver();
-
-                try
-                { label8.Text = "Total: " + HardwareInfo.GetPhysicalMemory() + HardwareInfo.getmeminfo() + HardwareInfo.getmeminfo2(); }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString(), "WMI Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                label9.Text = HardwareInfo.getcpuinfo();
-
-                textBox1.Text = "";
-                textBox2.Text = "";
-                textBox3.Text = "";
-                textBox4.Text = "";
-                textBox5.Text = "";
-                string gpuname = HardwareInfo.GetGPUName();
-
-                Console.SetOut(new TextBoxWriter(textBox4));
-                
-                
-                Console.SetOut(new TextBoxWriter(textBox1));
-                ConnectionOptions connection = new ConnectionOptions();
-                connection.Impersonation = ImpersonationLevel.Impersonate;
-                ManagementScope scope = new ManagementScope("\\root\\CIMV2", connection);
-                scope.Connect();
-                ObjectQuery query = new ObjectQuery("SELECT * FROM Win32_PhysicalMemory");
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
-                ManagementObjectCollection allmem = searcher.Get();
-                long memsz = 0;
-                long memfsz = 0;
-                foreach (ManagementObject onemem in allmem)
-                {
-
-                    memsz = Convert.ToInt64(onemem["Capacity"]);
-                    memfsz = ((memsz / 1024) / 1024) / 1024;
-                    Console.WriteLine("Slot: {0}   Modelo: {1} {2}   Tamanho: {3}GB",
-                        onemem["DeviceLocator"], onemem["Manufacturer"], onemem["Model"], memfsz.ToString());
-                }
-
-                try
-                {
-                    Console.SetOut(new TextBoxWriter(textBox2));
-                    if (Environment.OSVersion.Version.Major == 6)
-                    {
-                        if (Environment.OSVersion.Version.Minor == 1)
-                        {
-                            long vlmax = 0;
-                            long vlcrt = 0;
-                            long szmax = 0;
-                            long szcrt = 0;
-                            DriveInfo[] allDrives = DriveInfo.GetDrives();
-                            string driveLetter = Path.GetPathRoot(Environment.CurrentDirectory);
-                            foreach (DriveInfo d in allDrives)
-                            {
-                                if (d.IsReady == true)
-                                {
-                                    vlmax = Convert.ToInt64(d.TotalSize);
-                                    vlcrt = Convert.ToInt64(d.TotalFreeSpace);
-                                    szmax = ((vlmax / 1024) / 1024) / 1024;
-                                    szcrt = ((vlcrt / 1024) / 1024) / 1024;
-                                    if (d.Name != driveLetter)
-                                        if (szmax != 20)
-                                            Console.WriteLine("Disco: {0}" + "\t" + "Total: {1}GB" + "\t" + "Livres: {2}GB" + "\t" + "Formato: {3}" + "\t" + "Tipo: {4}", d.Name, szmax, szcrt, d.DriveFormat, d.DriveType);
-
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        ManagementScope scope2 = new ManagementScope(@"\\localhost\ROOT\Microsoft\Windows\Storage");
-                        ObjectQuery query2 = new ObjectQuery("SELECT * FROM MSFT_PhysicalDisk");
-                        ManagementObjectSearcher searcher2 = new ManagementObjectSearcher(scope2, query2);
-                        ManagementObjectCollection allPDisks = searcher2.Get();
-                        long dsktp = 0;
-                        long drvtp = 0;
-                        long dskhealth = 0;
-                        string dsktype = "Outro";
-                        string dskhlt = "Desconhecido";
-
-                        foreach (ManagementObject onePDisk in allPDisks)
-                        {
-                            dsktp = Convert.ToInt64(onePDisk["BusType"]);
-                            drvtp = Convert.ToInt64(onePDisk["MediaType"]);
-                            dskhealth = Convert.ToInt64(onePDisk["HealthStatus"]);
-                            if (dsktp == 3) dsktype = "IDE";
-                            if (dsktp == 7) dsktype = "USB";
-                            if (dsktp == 8) dsktype = "RAID";
-                            if (dsktp == 12) dsktype = "SD";
-                            if (dsktp == 13) dsktype = "MMC";
-                            if (dsktp == 11)
-                            {
-                                if (drvtp == 4) dsktype = "SATA SSD";
-                                else dsktype = "SATA HD";
-                            }
-                            if (dskhealth == 0) dskhlt = "Boa";
-                            if (dskhealth == 1) dskhlt = "ALERTA!";
-                            if (dskhealth == 2) dskhlt = "RUIM!!!";
-                            if (onePDisk["Model"].ToString() != "My Passport 0820")
-                                Console.WriteLine("{0}" + "\t" + "{1}" + "\t" + "{2}" + "\t" + "{3}", "Disco: " + onePDisk["DeviceId"], "Modelo: " + onePDisk["Model"], "Tipo: " + dsktype, "Saúde: " + dskhlt);
-                        }
-                        Console.WriteLine("");
-                        long vlmax = 0;
-                        long vlcrt = 0;
-                        long szmax = 0;
-                        long szcrt = 0;
-                        string driveLetter = Path.GetPathRoot(Environment.CurrentDirectory);
-                        DriveInfo[] allDrives = DriveInfo.GetDrives();
-                        foreach (DriveInfo d in allDrives)
-                        {
-                            if (d.IsReady == true)
-                            {
-                                vlmax = Convert.ToInt64(d.TotalSize);
-                                vlcrt = Convert.ToInt64(d.TotalFreeSpace);
-                                szmax = ((vlmax / 1024) / 1024) / 1024;
-                                szcrt = ((vlcrt / 1024) / 1024) / 1024;
-                                if (d.Name != driveLetter)
-                                    if (szmax != 20)
-                                        Console.WriteLine("Volume: {0}" + "\t" + "Total: {1}GB" + "\t" + "Livres: {2}GB" + "\t" + "Formato: {3}", d.Name, szmax, szcrt, d.DriveFormat);
-
-                            }
-
-                        }
-                    }
-                }
-                catch (Exception dskex)
-                { MessageBox.Show(dskex.Message, "Erro ao obter informações", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-
-                Console.SetOut(new TextBoxWriter(textBox3));
-                ManagementObjectSearcher gpuinfo = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
-                string gpu = string.Empty;
-                foreach (ManagementObject mo in gpuinfo.Get())
-                {
-                    PropertyData currentBitsPerPixel = mo.Properties["CurrentBitsPerPixel"];
-                    PropertyData description = mo.Properties["Description"];
-                    if (currentBitsPerPixel != null && description != null)
-                    {
-                        if (currentBitsPerPixel.Value != null)
-                        {
-                            gpu = ((string)(description.Value));
-                            gpu = gpu.Replace("(TM)", "").Replace("(tm)", "").Replace("™", "").Replace("®", "").Replace("(R)", "").Replace("(r)", "").Replace("©", "").Replace("(C)", "").Replace("(c)", "")
-                                .Replace("    ", " ").Replace("  ", " ").Replace("Express", "").Replace("Chipset", "").Replace("Microsoft", "").Replace("Corporation", "").Replace("(", "")
-                                .Replace(")", "").Replace("WDDM", "").Replace("WDM", "");
-                            Console.WriteLine("Nome: {0}   ");
-                        }
-                    }
-                }
-                a = a + 1;
-            }
-
-            
         }
 
+        private void dispositivos_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        private void gpo_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        private void services_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        private void limpardisco_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        private void msconfig_Click(object sender, EventArgs e)
+        {
 
-
-
-
-
-
-
-
-
-        #endregion
-
-        
+        }
     }
 }
 

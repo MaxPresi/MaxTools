@@ -137,34 +137,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bw\install.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="bw\install.Designer.cs">
-      <DependentUpon>install.cs</DependentUpon>
-    </Compile>
-    <Compile Include="bw\outros.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="bw\outros.Designer.cs">
-      <DependentUpon>outros.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Hard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Hard.Designer.cs">
+      <DependentUpon>Hard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Install.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Install.Designer.cs">
+      <DependentUpon>Install.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Tools.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Tools.Designer.cs">
+      <DependentUpon>Tools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Util.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Util.Designer.cs">
+      <DependentUpon>Util.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="bw\install.resx">
-      <DependentUpon>install.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="bw\outros.resx">
-      <DependentUpon>outros.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Hard.resx">
+      <DependentUpon>Hard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Install.resx">
+      <DependentUpon>Install.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Tools.resx">
+      <DependentUpon>Tools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Util.resx">
+      <DependentUpon>Util.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
