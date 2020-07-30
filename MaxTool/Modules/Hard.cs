@@ -9,15 +9,19 @@ using System.Windows.Forms;
 using static MaxTool.Form1;
 using System.Management;
 using System.IO;
+using OpenHardwareMonitor.Hardware;
 using MaxTool;
 
 namespace MaxTools.Modules
 {
     public partial class Hard : UserControl
     {
+        Computer thisComputer;
         public Hard()
         {
             InitializeComponent();
+            thisComputer = new Computer() { CPUEnabled = true };
+            thisComputer.Open();
         }
         int a = 0;
         private void UserControl1_Load(object sender, EventArgs e)
@@ -25,28 +29,28 @@ namespace MaxTools.Modules
             
             if (a == 0)
             {
-                label7.Text = HardwareInfo.getmoboInfo() + HardwareInfo.getbeiosver();
+                #region MOBO e CPU
+                MBlbl.Text = HardwareInfo.getmoboInfo() + HardwareInfo.getbeiosver();                
+
+                CPUlbl.Text = HardwareInfo.getcpuinfo();
+
+                ramBox.Text = "";
+                dskBox.Text = "";
+                moboBox.Text = "";
+                gpuBox.Text = "";
+                cpuBox.Text = "";
+
+                #endregion
+
+                #region RAM
 
                 try
-                { label8.Text = "Total: " + HardwareInfo.GetPhysicalMemory() + HardwareInfo.getmeminfo() + HardwareInfo.getmeminfo2(); }
+                { RAMlbl.Text = "Total: " + HardwareInfo.GetPhysicalMemory() + HardwareInfo.getmeminfo() + HardwareInfo.getmeminfo2(); }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString(), "WMI Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                label9.Text = HardwareInfo.getcpuinfo();
-
-                textBox1.Text = "";
-                textBox2.Text = "";
-                textBox3.Text = "";
-                textBox4.Text = "";
-                textBox5.Text = "";
-                string gpuname = HardwareInfo.GetGPUName();
-
-                Console.SetOut(new TextBoxWriter(textBox4));
-
-
-                Console.SetOut(new TextBoxWriter(textBox1));
+                Console.SetOut(new TextBoxWriter(ramBox));
                 ConnectionOptions connection = new ConnectionOptions();
                 connection.Impersonation = ImpersonationLevel.Impersonate;
                 ManagementScope scope = new ManagementScope("\\root\\CIMV2", connection);
@@ -65,9 +69,13 @@ namespace MaxTools.Modules
                         onemem["DeviceLocator"], onemem["Manufacturer"], onemem["Model"], memfsz.ToString());
                 }
 
+                #endregion
+
+                #region DSK
+
                 try
                 {
-                    Console.SetOut(new TextBoxWriter(textBox2));
+                    Console.SetOut(new TextBoxWriter(dskBox));
 
                     ManagementScope scope2 = new ManagementScope(@"\\localhost\ROOT\Microsoft\Windows\Storage");
                     ObjectQuery query2 = new ObjectQuery("SELECT * FROM MSFT_PhysicalDisk");
@@ -85,7 +93,7 @@ namespace MaxTools.Modules
                         drvtp = Convert.ToInt64(onePDisk["MediaType"]);
                         dskhealth = Convert.ToInt64(onePDisk["HealthStatus"]);
                         if (dsktp == 7) dsktype = "USB";
-                        if (dsktp == 8) dsktype = "RAID";
+                        if (dsktp == 8) dsktype = "SCSI";
                         if (dsktp == 12) dsktype = "SD";
                         if (dsktp == 13) dsktype = "MMC";
                         if (dsktp == 11)
@@ -126,26 +134,119 @@ namespace MaxTools.Modules
                 catch (Exception dskex)
                 { MessageBox.Show(dskex.Message, "Erro ao obter informações", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
-                Console.SetOut(new TextBoxWriter(textBox3));
+                #endregion
+
+                #region GPU
+
+                Console.SetOut(new TextBoxWriter(gpuBox));
                 ManagementObjectSearcher gpuinfo = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
                 string gpu = string.Empty;
+                int vram = 0;
                 foreach (ManagementObject mo in gpuinfo.Get())
                 {
-                    PropertyData currentBitsPerPixel = mo.Properties["CurrentBitsPerPixel"];
                     PropertyData description = mo.Properties["Description"];
-                    if (currentBitsPerPixel != null && description != null)
-                    {
-                        if (currentBitsPerPixel.Value != null)
-                        {
-                            gpu = ((string)(description.Value));
-                            gpu = gpu.Replace("(TM)", "").Replace("(tm)", "").Replace("™", "").Replace("®", "").Replace("(R)", "").Replace("(r)", "").Replace("©", "").Replace("(C)", "").Replace("(c)", "")
-                                .Replace("    ", " ").Replace("  ", " ").Replace("Express", "").Replace("Chipset", "").Replace("Microsoft", "").Replace("Corporation", "").Replace("(", "")
-                                .Replace(")", "").Replace("WDDM", "").Replace("WDM", "");
-                            Console.WriteLine("Nome: {0}   ");
-                        }
+                    if (description != null)
+                    {      
+                        gpu = ((string)(description.Value));
+                        gpu = gpu.Replace("(TM)", "").Replace("(tm)", "").Replace("™", "").Replace("®", "").Replace("(R)", "").Replace("(r)", "").Replace("©", "").Replace("(C)", "").Replace("(c)", "")
+                            .Replace("    ", " ").Replace("  ", " ").Replace("Express", "").Replace("Chipset", "").Replace("Microsoft", "").Replace("Corporation", "").Replace("(", "")
+                            .Replace(")", "").Replace("WDDM", "").Replace("WDM", "");
+                        
+                        
                     }
                 }
-                a = a + 1;
+                ManagementObjectSearcher vramS = new ManagementObjectSearcher("select AdapterRAM from Win32_VideoController");
+
+                foreach (ManagementObject rg in vramS.Get())
+                {
+                    var gpram = rg.Properties["AdapterRAM"].Value as UInt32?;
+
+                    if (gpram.HasValue)
+                    {
+                        vram = ((int)gpram / 1048576);
+                    }
+                }
+                string bus = "";
+                string clVR = "";
+                string clBG = "";
+                string clAG = "";
+                string tGPU = "";
+                string tVR = "";
+                string RPM = "";
+
+                if (gpu.Contains("AMD") == true)
+                {
+                    foreach (var hardwareItem in thisComputer.Hardware)
+                    {
+                        if (hardwareItem.HardwareType == HardwareType.GpuAti)
+                        {
+                            hardwareItem.Update();
+                            foreach (IHardware subHardware in hardwareItem.SubHardware)
+                                subHardware.Update();
+                            foreach (var sensor in hardwareItem.Sensors)
+                            {
+                                if (sensor.SensorType == SensorType.Temperature)
+                                {
+
+                                    tGPU = sensor.Value.Value.ToString();
+                                }
+
+                                if (sensor.SensorType == SensorType.Clock)
+                                {
+
+                                    clAG = sensor.Value.Value.ToString();
+                                }
+                            }
+                        }
+                    }
+                    Console.WriteLine("Nome: {0}" + "\t" + "BUS: {1}bits" + "\n" + "Capacidade VRAM: {2}GB" + "\t" + "Clock VRAM: {3}Mhz" + "\n" +
+                    "Clock Base GPU: {4}Mhz" + "\t" + "Clock Atual GPU: {5}Mhz" + "\n" + "Temp. GPU: {6}°C" + "\t" + "Temp. VRAM: {7}°C" + "\t" +
+                    "Velocidade FAN: {8}RPM", gpu, bus, vram.ToString(), clVR, clBG, clAG, tGPU, tVR, RPM);
+
+                }
+
+                if (gpu.Contains("Nvidia") == true)
+                {
+                    foreach (var hardwareItem in thisComputer.Hardware)
+                    {
+                        if (hardwareItem.HardwareType == HardwareType.GpuNvidia)
+                        {
+                            hardwareItem.Update();
+                            foreach (IHardware subHardware in hardwareItem.SubHardware)
+                                subHardware.Update();
+                            foreach (var sensor in hardwareItem.Sensors)
+                            {
+                                if (sensor.SensorType == SensorType.Temperature)
+                                {
+
+                                    tGPU = sensor.Value.Value.ToString();
+                                }
+
+                                if (sensor.SensorType == SensorType.Clock)
+                                {
+
+                                    clAG = sensor.Value.Value.ToString();
+                                }
+                            }
+                        }
+
+                    }
+                    Console.WriteLine("Nome: {0}" + "\t" + "BUS: {1}bits" + "\n" + "Capacidade VRAM: {2}GB" + "\t" + "Clock VRAM: {3}Mhz" + "\n" +
+                    "Clock Base GPU: {4}Mhz" + "\t" + "Clock Atual GPU: {5}Mhz" + "\n" + "Temp. GPU: {6}°C" + "\t" + "Temp. VRAM: {7}°C" + "\t" +
+                    "Velocidade FAN: {8}RPM", gpu, bus, vram.ToString(), clVR, clBG, clAG, tGPU, tVR, RPM);
+
+                }
+
+                if (gpu.Contains("Intel") == true)
+                {
+                    Console.WriteLine("Nome: {0}" + "\t" + "\n" + "Capacidade VRAM: {1}GB" + "\t" + "Clock Base GPU: {2}Mhz" + 
+                        "\n" + "Clock Atual GPU: {3}Mhz" + "\n" + "Temp. GPU: {4}°C", gpu, vram.ToString(), clBG, tGPU);
+                }
+               
+
+                #endregion
+
+                a = 1;
             }
         }
     }
