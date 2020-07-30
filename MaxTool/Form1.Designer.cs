@@ -33,16 +33,16 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.cpusage = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
             this.ramusage = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
-            this.dskusage = new System.Windows.Forms.Label();
-            this.label59 = new System.Windows.Forms.Label();
             this.gpulbl = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
             this.cpulbl = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.gpuusage = new System.Windows.Forms.Label();
+            this.dskusage = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.installtab = new System.Windows.Forms.TabPage();
             this.utiltab = new System.Windows.Forms.TabPage();
@@ -55,6 +55,7 @@
             this.util = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.dsklbl = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
@@ -65,16 +66,17 @@
             this.panel2.BackgroundImage = global::MaxTools.Properties.Resources.back3;
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.cpusage);
-            this.panel2.Controls.Add(this.label61);
+            this.panel2.Controls.Add(this.dsklbl);
+            this.panel2.Controls.Add(this.gpuusage);
             this.panel2.Controls.Add(this.ramusage);
             this.panel2.Controls.Add(this.label56);
-            this.panel2.Controls.Add(this.dskusage);
             this.panel2.Controls.Add(this.label59);
-            this.panel2.Controls.Add(this.gpulbl);
+            this.panel2.Controls.Add(this.dskusage);
+            this.panel2.Controls.Add(this.cpusage);
+            this.panel2.Controls.Add(this.label61);
             this.panel2.Controls.Add(this.label26);
+            this.panel2.Controls.Add(this.gpulbl);
             this.panel2.Controls.Add(this.cpulbl);
-            this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(1, 2);
@@ -88,11 +90,12 @@
             this.cpusage.BackColor = System.Drawing.Color.Transparent;
             this.cpusage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpusage.ForeColor = System.Drawing.Color.White;
-            this.cpusage.Location = new System.Drawing.Point(443, 6);
+            this.cpusage.Location = new System.Drawing.Point(542, 19);
             this.cpusage.Name = "cpusage";
-            this.cpusage.Size = new System.Drawing.Size(34, 15);
+            this.cpusage.Size = new System.Drawing.Size(39, 15);
             this.cpusage.TabIndex = 12;
-            this.cpusage.Text = "40°C";
+            this.cpusage.Text = "100%";
+            this.cpusage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label61
             // 
@@ -100,71 +103,12 @@
             this.label61.BackColor = System.Drawing.Color.Transparent;
             this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label61.ForeColor = System.Drawing.Color.White;
-            this.label61.Location = new System.Drawing.Point(406, 6);
+            this.label61.Location = new System.Drawing.Point(542, 3);
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(35, 15);
             this.label61.TabIndex = 11;
             this.label61.Text = "CPU";
-            // 
-            // ramusage
-            // 
-            this.ramusage.AutoSize = true;
-            this.ramusage.BackColor = System.Drawing.Color.Transparent;
-            this.ramusage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ramusage.ForeColor = System.Drawing.Color.White;
-            this.ramusage.Location = new System.Drawing.Point(520, 7);
-            this.ramusage.Name = "ramusage";
-            this.ramusage.Size = new System.Drawing.Size(34, 15);
-            this.ramusage.TabIndex = 10;
-            this.ramusage.Text = "40°C";
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.BackColor = System.Drawing.Color.Transparent;
-            this.label56.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label56.ForeColor = System.Drawing.Color.White;
-            this.label56.Location = new System.Drawing.Point(483, 7);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(37, 15);
-            this.label56.TabIndex = 9;
-            this.label56.Text = "RAM";
-            // 
-            // dskusage
-            // 
-            this.dskusage.AutoSize = true;
-            this.dskusage.BackColor = System.Drawing.Color.Transparent;
-            this.dskusage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dskusage.ForeColor = System.Drawing.Color.White;
-            this.dskusage.Location = new System.Drawing.Point(596, 7);
-            this.dskusage.Name = "dskusage";
-            this.dskusage.Size = new System.Drawing.Size(26, 15);
-            this.dskusage.TabIndex = 8;
-            this.dskusage.Text = "N/A";
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.BackColor = System.Drawing.Color.Transparent;
-            this.label59.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label59.ForeColor = System.Drawing.Color.White;
-            this.label59.Location = new System.Drawing.Point(559, 7);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(35, 15);
-            this.label59.TabIndex = 7;
-            this.label59.Text = "DSK";
-            // 
-            // gpulbl
-            // 
-            this.gpulbl.AutoSize = true;
-            this.gpulbl.BackColor = System.Drawing.Color.Transparent;
-            this.gpulbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpulbl.ForeColor = System.Drawing.Color.White;
-            this.gpulbl.Location = new System.Drawing.Point(520, 30);
-            this.gpulbl.Name = "gpulbl";
-            this.gpulbl.Size = new System.Drawing.Size(34, 15);
-            this.gpulbl.TabIndex = 6;
-            this.gpulbl.Text = "40°C";
+            this.label61.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label26
             // 
@@ -172,11 +116,51 @@
             this.label26.BackColor = System.Drawing.Color.Transparent;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.ForeColor = System.Drawing.Color.White;
-            this.label26.Location = new System.Drawing.Point(483, 30);
+            this.label26.Location = new System.Drawing.Point(500, 2);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(36, 15);
             this.label26.TabIndex = 5;
             this.label26.Text = "GPU";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ramusage
+            // 
+            this.ramusage.AutoSize = true;
+            this.ramusage.BackColor = System.Drawing.Color.Transparent;
+            this.ramusage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ramusage.ForeColor = System.Drawing.Color.White;
+            this.ramusage.Location = new System.Drawing.Point(457, 20);
+            this.ramusage.Name = "ramusage";
+            this.ramusage.Size = new System.Drawing.Size(39, 15);
+            this.ramusage.TabIndex = 10;
+            this.ramusage.Text = "100%";
+            this.ramusage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.BackColor = System.Drawing.Color.Transparent;
+            this.label56.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label56.ForeColor = System.Drawing.Color.White;
+            this.label56.Location = new System.Drawing.Point(457, 1);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(37, 15);
+            this.label56.TabIndex = 9;
+            this.label56.Text = "RAM";
+            this.label56.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // gpulbl
+            // 
+            this.gpulbl.AutoSize = true;
+            this.gpulbl.BackColor = System.Drawing.Color.Transparent;
+            this.gpulbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gpulbl.ForeColor = System.Drawing.Color.White;
+            this.gpulbl.Location = new System.Drawing.Point(500, 37);
+            this.gpulbl.Name = "gpulbl";
+            this.gpulbl.Size = new System.Drawing.Size(34, 15);
+            this.gpulbl.TabIndex = 6;
+            this.gpulbl.Text = "40°C";
+            this.gpulbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cpulbl
             // 
@@ -184,30 +168,19 @@
             this.cpulbl.BackColor = System.Drawing.Color.Transparent;
             this.cpulbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpulbl.ForeColor = System.Drawing.Color.White;
-            this.cpulbl.Location = new System.Drawing.Point(596, 30);
+            this.cpulbl.Location = new System.Drawing.Point(542, 37);
             this.cpulbl.Name = "cpulbl";
             this.cpulbl.Size = new System.Drawing.Size(34, 15);
             this.cpulbl.TabIndex = 4;
             this.cpulbl.Text = "40°C";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(559, 30);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(39, 16);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "CPU";
+            this.cpulbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(78, 33);
+            this.label2.Location = new System.Drawing.Point(68, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 1;
@@ -218,11 +191,50 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(77, 11);
+            this.label1.Location = new System.Drawing.Point(67, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
+            // 
+            // gpuusage
+            // 
+            this.gpuusage.AutoSize = true;
+            this.gpuusage.BackColor = System.Drawing.Color.Transparent;
+            this.gpuusage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gpuusage.ForeColor = System.Drawing.Color.White;
+            this.gpuusage.Location = new System.Drawing.Point(500, 20);
+            this.gpuusage.Name = "gpuusage";
+            this.gpuusage.Size = new System.Drawing.Size(39, 15);
+            this.gpuusage.TabIndex = 14;
+            this.gpuusage.Text = "100%";
+            this.gpuusage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dskusage
+            // 
+            this.dskusage.AutoSize = true;
+            this.dskusage.BackColor = System.Drawing.Color.Transparent;
+            this.dskusage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dskusage.ForeColor = System.Drawing.Color.White;
+            this.dskusage.Location = new System.Drawing.Point(583, 19);
+            this.dskusage.Name = "dskusage";
+            this.dskusage.Size = new System.Drawing.Size(39, 15);
+            this.dskusage.TabIndex = 8;
+            this.dskusage.Text = "100%";
+            this.dskusage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.BackColor = System.Drawing.Color.Transparent;
+            this.label59.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label59.ForeColor = System.Drawing.Color.White;
+            this.label59.Location = new System.Drawing.Point(583, 3);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(35, 15);
+            this.label59.TabIndex = 7;
+            this.label59.Text = "DSK";
+            this.label59.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabControl1
             // 
@@ -383,6 +395,19 @@
             this.backgroundWorker1.WorkerSupportsCancellation = true;
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
+            // dsklbl
+            // 
+            this.dsklbl.AutoSize = true;
+            this.dsklbl.BackColor = System.Drawing.Color.Transparent;
+            this.dsklbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dsklbl.ForeColor = System.Drawing.Color.White;
+            this.dsklbl.Location = new System.Drawing.Point(584, 37);
+            this.dsklbl.Name = "dsklbl";
+            this.dsklbl.Size = new System.Drawing.Size(34, 15);
+            this.dsklbl.TabIndex = 15;
+            this.dsklbl.Text = "40°C";
+            this.dsklbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -424,7 +449,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TabPage installtab;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label11;
         public System.Windows.Forms.Label gpulbl;
         public System.Windows.Forms.Label cpulbl;
         private System.Windows.Forms.Timer timer1;
@@ -435,6 +459,8 @@
         public System.Windows.Forms.Label dskusage;
         private System.Windows.Forms.Label label59;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        public System.Windows.Forms.Label gpuusage;
+        public System.Windows.Forms.Label dsklbl;
     }
 }
 

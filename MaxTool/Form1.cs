@@ -137,27 +137,100 @@ namespace MaxTool
                             cpusage.Text = cpuPercent.ToString() + "%";
                         }
                     }
-                    // RAM USAGE
-                    var wmiObject = new ManagementObjectSearcher("select * from Win32_OperatingSystem");
-
-                    var memoryValues = wmiObject.Get().Cast<ManagementObject>().Select(mo => new {
-                        FreePhysicalMemory = Double.Parse(mo["FreePhysicalMemory"].ToString()),
-                        TotalVisibleMemorySize = Double.Parse(mo["TotalVisibleMemorySize"].ToString())
-                    }).FirstOrDefault();
-
-                    if (memoryValues != null)
-                    {
-                        var percent = ((memoryValues.TotalVisibleMemorySize - memoryValues.FreePhysicalMemory) / memoryValues.TotalVisibleMemorySize) * 100;
-                        int ramus = Convert.ToInt32(percent);
-                        ramusage.Text = ramus.ToString() + "%";
-                    }
-                    // DISK USAGE
-                    PerformanceCounter disk = new PerformanceCounter("PhysicalDisk", "% Disk Time", "_Total");
-                    int diskValues = 0;
-                    diskValues = Convert.ToInt32(disk.NextValue());
-                    dskusage.Text = diskValues.ToString() + "%";
-                    
                 }
+                if (hardwareItem.HardwareType == HardwareType.GpuAti)
+                {
+                    hardwareItem.Update();
+                    foreach (IHardware subHardware in hardwareItem.SubHardware)
+                        subHardware.Update();
+                    // GPU TEMP
+                    foreach (var sensor in hardwareItem.Sensors)
+                    {
+                        if (sensor.SensorType == SensorType.Temperature)
+                        {
+
+                            string gputemp = string.Format("{0}°C", sensor.Value.Value.ToString());
+                            gpulbl.Text = gputemp;
+                        }
+                    }
+                    // GPU USAGE
+                    foreach (var sensor in hardwareItem.Sensors)
+                    {
+                        if (sensor.SensorType == SensorType.Load)
+                        {
+
+                            int gpuPercent = Convert.ToInt32(sensor.Value.Value);
+                            gpuusage.Text = gpuPercent.ToString() + "%";
+                        }
+                    }
+                }
+                if (hardwareItem.HardwareType == HardwareType.GpuNvidia)
+                {
+                    hardwareItem.Update();
+                    foreach (IHardware subHardware in hardwareItem.SubHardware)
+                        subHardware.Update();
+                    // GPU TEMP
+                    foreach (var sensor in hardwareItem.Sensors)
+                    {
+                        if (sensor.SensorType == SensorType.Temperature)
+                        {
+
+                            string gputemp = string.Format("{0}°C", sensor.Value.Value.ToString());
+                            gpulbl.Text = gputemp;
+                        }
+                    }
+                    // GPU USAGE
+                    foreach (var sensor in hardwareItem.Sensors)
+                    {
+                        if (sensor.SensorType == SensorType.Load)
+                        {
+
+                            int gpuPercent = Convert.ToInt32(sensor.Value.Value);
+                            gpuusage.Text = gpuPercent.ToString() + "%";
+                        }
+                    }
+                }
+
+                if (hardwareItem.HardwareType != HardwareType.GpuAti && hardwareItem.HardwareType != HardwareType.GpuNvidia)
+                {
+
+                }
+
+                if (hardwareItem.HardwareType == HardwareType.HDD)
+                {
+                    hardwareItem.Update();
+                    foreach (IHardware subHardware in hardwareItem.SubHardware)
+                        subHardware.Update();
+                    // DSK TEMP
+                    foreach (var sensor in hardwareItem.Sensors)
+                    {
+                        if (sensor.SensorType == SensorType.Temperature)
+                        {
+
+                            string dsktemp = string.Format("{0}°C", sensor.Value.Value.ToString());
+                            dsklbl.Text = dsktemp;
+                        }
+                    }
+                }
+                // RAM USAGE
+                var wmiObject = new ManagementObjectSearcher("select * from Win32_OperatingSystem");
+
+                var memoryValues = wmiObject.Get().Cast<ManagementObject>().Select(mo => new {
+                    FreePhysicalMemory = Double.Parse(mo["FreePhysicalMemory"].ToString()),
+                    TotalVisibleMemorySize = Double.Parse(mo["TotalVisibleMemorySize"].ToString())
+                }).FirstOrDefault();
+
+                if (memoryValues != null)
+                {
+                    var percent = ((memoryValues.TotalVisibleMemorySize - memoryValues.FreePhysicalMemory) / memoryValues.TotalVisibleMemorySize) * 100;
+                    int ramus = Convert.ToInt32(percent);
+                    ramusage.Text = ramus.ToString() + "%";
+                }
+                // DISK USAGE
+                PerformanceCounter disk = new PerformanceCounter("PhysicalDisk", "% Disk Time", "_Total");
+                int diskValues = 0;
+                diskValues = Convert.ToInt32(disk.NextValue());
+                dskusage.Text = diskValues.ToString() + "%";
             }
         }
 
@@ -449,87 +522,9 @@ namespace MaxTool
             hardvar = 1;
         }
 
+
         #endregion
 
-        private void gerenciar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void eventos_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void memtest_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void perfmon_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void impressoras_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void painel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ipconf_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gpup_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void prompt_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void winr_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void contas_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dispositivos_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gpo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void services_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void limpardisco_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void msconfig_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 
