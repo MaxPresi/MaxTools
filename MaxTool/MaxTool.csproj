@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MaxTools</RootNamespace>
     <AssemblyName>MaxTools</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -39,6 +39,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,6 +49,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\server-settings-tools-icone-5972.ico</ApplicationIcon>
@@ -78,6 +80,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -87,6 +90,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -96,6 +100,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -105,6 +110,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Win32.TaskScheduler, Version=2.8.5.0, Culture=neutral, PublicKeyToken=c416bc1b32d97233, processorArchitecture=MSIL">
@@ -137,34 +143,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bw\install.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="bw\install.Designer.cs">
-      <DependentUpon>install.cs</DependentUpon>
-    </Compile>
-    <Compile Include="bw\outros.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="bw\outros.Designer.cs">
-      <DependentUpon>outros.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Hard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Hard.Designer.cs">
+      <DependentUpon>Hard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Install.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Install.Designer.cs">
+      <DependentUpon>Install.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Tools.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Tools.Designer.cs">
+      <DependentUpon>Tools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Util.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Util.Designer.cs">
+      <DependentUpon>Util.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="bw\install.resx">
-      <DependentUpon>install.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="bw\outros.resx">
-      <DependentUpon>outros.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Hard.resx">
+      <DependentUpon>Hard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Install.resx">
+      <DependentUpon>Install.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Tools.resx">
+      <DependentUpon>Tools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Util.resx">
+      <DependentUpon>Util.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
