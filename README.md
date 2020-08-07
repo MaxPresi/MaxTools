@@ -13,6 +13,13 @@ Isso pode ser mudado no futuro.
 
 Listas de Programas substituídos por Scrips internos:
 - Advanced System Care ( parte substituído na v.0.5.0.0, parte de limpeza de registro menos agressiva e nociva será implementada em breve)
-- Revo Uninstaller (em processo de substituição)
-- Microsoft FixIt (em processo de Substituição)
-- TreeSize (não implementado ainda e ainda sim em processo de substituição)
+
+Programas em processo de substituição:
+- Revo Uninstaller e Microsoft FixIt
+- TreeSize (não implementado ainda)
+
+
+To Do:
+- Finalizar aba de monitoramento e informação de hardware (Placa de Vídeo Específicamente);
+- Substituir o máximo possível programas de terceiros na aba Ferramentas (Tools) por scripts próprios;
+- Terminar aba de instalação.
