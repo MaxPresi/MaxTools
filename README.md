@@ -1,4 +1,4 @@
-# MaxTools - ALFA
+# MaxTools - ALPHA
 Caixa de Ferramentas para otimização Pós-Formatação e Manutenção geral
 
 MaxTools é um programa de automatização e otimização do trabalho do técnico, visando acelerar os processos pós-formatação, diagnóstico e manutenção de PCs e Notes.
