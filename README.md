@@ -22,4 +22,4 @@ Programas em processo de substituição:
 To Do:
 - Finalizar aba de monitoramento e informação de hardware (Placa de Vídeo Específicamente);
 - Substituir o máximo possível programas de terceiros na aba Ferramentas (Tools) por scripts próprios;
-- Terminar aba de instalação.
+- Refazer aba de instalação.
